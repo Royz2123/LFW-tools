@@ -22,44 +22,34 @@ Hope this helps someone!
 
 Assume the following directory tree, where faces are the faces from the LFW database:
 
-'''
+```
   .
   |-- LFW_tools.py
-
   |-- faces
-
   |   |-- Brad_Pitt_0001.pgm
-
   |   |-- Brad_Pitt_0002.pgm
-
   |   |-- ...
-
   |   |-- Brad_Pitt_0012.pgm
-
   |   |-- Johnny_Depp_0001.pgm
-
   |   |-- Johnny_Depp_0002.pgm
-
   |   |-- ...
-
   |   |-- Johnny_Depp_00017.pgm
-
   |   |-- ...
-'''
+```
 
 To execute the toolbox:
 
-'''bash
+```bash
 cd /path/to/master
-
 python LFW_tools.py /faces
-'''
+```
 
 Allowed commands + description appear in the terminal
 
 ### Future work
 
 ~ Add support for multiple paths
+
 ~ Create a csv file
 
 ### Conclusions
