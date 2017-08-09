@@ -60,6 +60,7 @@ Allowed commands + description appear in the terminal
 ### Future work
 
 ~ Add support for multiple paths
+
 ~ Create a csv file
 
 ### Conclusions
