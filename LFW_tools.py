@@ -18,10 +18,10 @@ ACTION_DESC=(
 
 def main():
     if len(sys.argv) != 2:
-        print "usage: create_csv <base_path>"
+        print "usage: create_csv <images_path>"
         sys.exit(1)
 
-    base_path = sys.argv[1]
+    images_path = sys.argv[1]
 
     print "Welcome! Here are a few scripts I offer for arranging LFW database.\n\n"
 
@@ -36,11 +36,11 @@ def main():
                 break
 
         if action_num == 1:
-            split_by_subjects(base_path)
+            split_by_subjects(images_path)
         elif action_num == 2:
-            remove_small_dirs(base_path)
+            remove_small_dirs(images_path)
         else:
-            remove_small_dirs(base_path, True)
+            remove_small_dirs(images_path, True)
 
         cont = raw_input(
             "Would you like to continue? (y/n): "
@@ -50,63 +50,60 @@ def main():
     print "\nThank you for using LFWcrop tools!"
 
 
-def remove_small_dirs(base_path, reorder=False):
+def remove_small_dirs(images_path, reorder=False):
     # recieve size
     size = int(raw_input("Enter the size of directories you would like to keep:\n"))
 
     dirs = [
-        d for d in os.listdir("%s/res" % base_path)
-        if os.path.isdir("%s/res/%s" % (base_path, d))
+        d for d in os.listdir("res") if os.path.isdir("res/%s" % d)
     ]
 
     for d in dirs:
-        if len(os.listdir("%s/res/%s" % (base_path, d))) < size:
+        if len(os.listdir("res/%s" % d)) < size:
             # remove directory
-            shutil.rmtree("%s/res/%s" % (base_path, d))
+            shutil.rmtree("res/%s" % d)
 
     # reorderif necessary
     if reorder:
-        reorder_dirs(base_path)
+        reorder_dirs()
 
 
-def reorder_dirs(base_path):
+def reorder_dirs():
     # change all to - aXXXX (collision purposes)
     new_dirs = [
-        d for d in os.listdir("%s/res" % base_path)
-        if os.path.isdir("%s/res/%s" % (base_path, d))
+        d for d in os.listdir("res") if os.path.isdir("res/%s" % d)
     ]
 
     dir_num = 1
     for d in new_dirs:
         os.rename(
-            "%s/res/%s" % (base_path, d),
-            "%s/res/a%s" % (base_path, dir_num)
+            "res/%s" % d,
+            "res/a%s" % dir_num
         )
         dir_num += 1
 
     # change back to sXXXX
     # change all to - aXXXX (collision purposes)
     new_dirs = [
-        d for d in os.listdir("%s/res" % base_path)
-        if os.path.isdir("%s/res/%s" % (base_path, d))
+        d for d in os.listdir("res") if os.path.isdir("res/%s" % d)
     ]
 
     for d in new_dirs:
         os.rename(
-            "%s/res/%s" % (base_path, d),
-            "%s/res/s%s" % (base_path, d[1:])
+            "res/%s" % d,
+            "res/s%s" % d[1:]
         )
 
-def split_by_subjects(base_path):
+def split_by_subjects(images_path):
     # first remove prev directory:
     try:
-        shutil.rmtree("%s/res" % base_path)
+        shutil.rmtree("res")
     except OSError:
         pass
 
     # create new empty res
     try:
-        os.mkdir("%s/res" % base_path)
+        os.mkdir("res")
     except OSError:
         pass
 
@@ -115,8 +112,8 @@ def split_by_subjects(base_path):
 
     # all files in directory
     files = [
-        f for f in os.listdir(base_path)
-        if os.path.isfile("%s/%s" % (base_path, f))
+        f for f in os.listdir(images_path)
+        if os.path.isfile("%s/%s" % (images_path, f))
     ]
 
     # loop through all the files
@@ -132,18 +129,12 @@ def split_by_subjects(base_path):
             }
 
             # create new directory
-            os.mkdir(
-                "%s/res/s%s" % (
-                    base_path,
-                    subjects[subject_name]["number"]
-                )
-            )
+            os.mkdir("res/s%s" % subjects[subject_name]["number"])
 
         #either way, directory is created. Add new photo
         shutil.copyfile(
-            "%s/%s" % (base_path, f),
-            "%s/res/s%s/%s.pgm" % (
-                base_path,
+            "%s/%s" % (images_path, f),
+            "res/s%s/%s.pgm" % (
                 subjects[subject_name]["number"],
                 subjects[subject_name]["count"],
             )

@@ -54,18 +54,6 @@ For example, command no.1 will change the tree to the following structure:
   .
   |-- LFW_tools.py
   |-- faces
-  |   |-- res
-  |   |   |-- s0
-  |   |   |   |-- 1.pgm
-  |   |   |   |-- 2.pgm
-  |   |   |   |-- ...
-  |   |   |   |-- 12.pgm
-  |   |   |-- s1  
-  |   |   |   |-- 1.pgm
-  |   |   |   |-- 2.pgm
-  |   |   |   |-- ...
-  |   |   |   |-- 17.pgm
-  |   |   | ...
   |   |-- Brad_Pitt_0001.pgm
   |   |-- Brad_Pitt_0002.pgm
   |   |-- ...
@@ -75,6 +63,18 @@ For example, command no.1 will change the tree to the following structure:
   |   |-- ...
   |   |-- Johnny_Depp_0017.pgm
   |   |-- ...
+  |-- res
+  |   |   |-- s0
+  |   |   |   |-- 1.pgm
+  |   |   |   |-- 2.pgm
+  |   |   |   |-- ...
+  |   |   |   |-- 12.pgm
+  |   |   |-- s1 
+  |   |   |   |-- 1.pgm
+  |   |   |   |-- 2.pgm
+  |   |   |   |-- ...
+  |   |   |   |-- 17.pgm
+  |   |   | ...
 ```
 
 Where s0/1.pgm corresponds to Brad_Pitt_0001.pgm
